@@ -20,6 +20,7 @@ from docopt import docopt
 
 API_URL = "https://api.github.com/search/issues"
 API_URL1 = "https://api.github.com/search/commits"
+API_URL2 = "https://api.github.com/users"
 RESULTS_PER_PAGE = 100
 
 
@@ -124,11 +125,19 @@ def get_commits(author):
             cont["contentItems"] = contentItems
     return cont
 
+
+def get_avatar(username):
+    r = requests.get(API_URL2+'/{}'.format(username)).json()
+    if r:
+        return r["avatar_url"]
+
+
 if __name__ == "__main__":
     arguments = docopt(__doc__)
 
     user = arguments['<user>']
     pr_issues_bodies = get_pr_issues_body(user)
+    avatar_url = get_avatar(user)
     if pr_issues_bodies:
         if arguments['--reverse-order']:
             pr_issues_bodies.reverse()

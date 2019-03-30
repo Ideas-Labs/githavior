@@ -1,18 +1,14 @@
 """
 Analyzes user data using IBM Watson Personality Insights
 and Natural Language Understanding APIs.
-
-Usage:
-  analyzer.py <user> [-r]
-  analyzer.py -h
 """
 
 import json
 import os
 
-import flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 
-from docopt import docopt
 from ibm_watson import PersonalityInsightsV3, NaturalLanguageUnderstandingV1
 from ibm_watson.natural_language_understanding_v1 import Features, ConceptsOptions, EntitiesOptions, KeywordsOptions
 
@@ -22,9 +18,11 @@ except ModuleNotFoundError:  # For Heroku
     NLU_KEY = os.environ['NLU_KEY']
     PERSONALITY_INSIGHTS_KEY = os.environ['PERSONALITY_INSIGHTS_KEY']
 
-from fetch_repos import get_commits, get_pr_issues_body
+from fetch_repos import get_commits, get_pr_issues_body, get_avatar
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 personality_service = PersonalityInsightsV3(
@@ -39,23 +37,23 @@ naturalLanguageUnderstanding = NaturalLanguageUnderstandingV1(
     username='apikey',
     password=NLU_KEY)
 
-if __name__ == '__main__':
-    arguments = docopt(__doc__)
-    author = arguments['<user>']
-    
-    commits = get_commits(author)
-    body = get_pr_issues_body(author)
+@app.route('/', methods=['POST'])
+def index():
+    username = request.form['username']
+
+    commits = get_commits(username)
+    body = get_pr_issues_body(username)
 
     body_list = [{
-         "content": text,
-         "contenttype": "text/plain",
-         "language": "en"
-      } for text in body
-      ]
-    
+            "content": text,
+            "contenttype": "text/plain",
+            "language": "en"
+        } for text in body
+        ]
+
     aug_content_list = commits.copy()
     aug_content_list["contentItems"] += body_list
-    
+
     aug_body = body + [comm["content"] for comm in commits["contentItems"]]
 
     profile = personality_service.profile(
@@ -63,7 +61,7 @@ if __name__ == '__main__':
         'application/json',
         raw_scores=True,
         consumption_preferences=True).get_result()
-
+    print('Personality Insights done')
     nlu_response = naturalLanguageUnderstanding.analyze(
         text=' '.join(aug_body),
         features=Features(
@@ -72,7 +70,13 @@ if __name__ == '__main__':
             concepts=ConceptsOptions(limit=5)
             )
         ).get_result()
+    print('NLU done')
 
-    print(json.dumps(profile, indent=4))
-    print('-*-'*33)
-    print(json.dumps(nlu_response, indent=4))
+    response = {
+        'username': username, 'avatar-url': get_avatar(username), 'profile': profile,
+        'nlu_response': nlu_response}  # Also, avatar url to be computed on FE.
+    return jsonify(response)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
