@@ -1,1 +1,1 @@
-worker: python githavior/analyzer.py
+web: gunicorn --pythonpath githavior/ analyzer:app
