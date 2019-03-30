@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 githavior/credentials.py
 githavior/profile.json
+.vscode/
