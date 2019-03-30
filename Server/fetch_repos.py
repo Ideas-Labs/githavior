@@ -25,14 +25,14 @@ RESULTS_PER_PAGE = 30
 def get_results_page(author, page=1):
     # GET request parameters:
     params = {
-        "q": "is:pr author:{} archived:false is:merged".format(author),
+        "q": "is:pr author:{}".format(author),
         "sort": "created",
         "order": "asc",
         "per_page": str(RESULTS_PER_PAGE),
         "page": str(page)
     }
-
-    response = requests.get(API_URL, params=params)
+    headers = {'User-Agent': 'request'}
+    response = requests.get(API_URL, params=params, headers=headers)
     if response.status_code == requests.codes.ok:
         return response.json()
 
@@ -55,16 +55,16 @@ def get_repo_list(user):
                 if not results_page:
                     break
             for pr in results_page["items"]:
-                if pr["author_association"] != "OWNER":
-                    # the user is not the repo's owner
-                    temp = pr["repository_url"].split("/")
-                    owner, repo_name = temp[-2], temp[-1]
-                    repo = owner + "/" + repo_name
-                    if repo not in repo_set:
-                        repo_set.add(repo)
-                        repo_list.append(repo)
+                # the user is not the repo's owner
+                temp = pr["repository_url"].split("/")
+                owner, repo_name = temp[-2], temp[-1]
+                repo = owner + "/" + repo_name
+                if repo not in repo_set:
+                    repo_set.add(repo)
+                    repo_list.append(repo)
         print(repo_list)
         commits = get_repo_commits(author=user, repo_list=repo_list)
+        #pull_request_description = get_pull_des(author=user)
 
         return commits.items()
 
