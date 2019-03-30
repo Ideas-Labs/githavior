@@ -9,4 +9,4 @@ PERSONALITY_INSIGHTS_KEY='Personality Insights API Key'
 NLU_KEY='Natual Language Understanding  API Key'
 ```
 
-. Then, for profile analysis, run `githavior/analyzer.py`.
+Then, for profile analysis, run `githavior/analyzer.py <username>`.

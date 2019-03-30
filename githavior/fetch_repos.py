@@ -45,10 +45,7 @@ def _get_body(results_page):
     for pr in results_page["items"]:
         temp = pr["body"]
         body.append(temp)
-    if body:
-        return body
-    else:
-        return ['']
+    return body
 
 
 def get_pr_issues_body(author):
@@ -78,7 +75,9 @@ def get_pr_issues_body(author):
                 if repo not in repo_set:
                     repo_set.add(repo)
                     repo_list.append(repo)
-        return body
+
+    body = [str(text) for text in body]
+    return body
 
 def get_commits(author):
     cont = {}
@@ -99,7 +98,7 @@ def get_commits(author):
             for comm in commits["items"]:
 
                 x = {}
-                x["content"] = comm["commit"]["message"]
+                x["content"] = str(comm["commit"]["message"])
                 x["time"] = comm["commit"]["author"]["date"]
                 x["id"] = comm["sha"]
                 x["language"] = "en"
