@@ -3,6 +3,7 @@ chardet==3.0.4
 Click==7.0
 docopt==0.6.2
 Flask==1.0.2
+Flask-Cors==3.0.7
 ibm-cloud-sdk-core==0.2.0
 ibm-watson==2.10.0
 idna==2.8
