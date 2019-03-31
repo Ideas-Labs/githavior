@@ -6,19 +6,19 @@ and Natural Language Understanding APIs.
 import json
 import os
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 
 from ibm_watson import PersonalityInsightsV3, NaturalLanguageUnderstandingV1
 from ibm_watson.natural_language_understanding_v1 import Features, ConceptsOptions, EntitiesOptions, KeywordsOptions
 
 try:
-    from credentials import NLU_KEY, PERSONALITY_INSIGHTS_KEY
+    from githavior.credentials import NLU_KEY, PERSONALITY_INSIGHTS_KEY
 except ModuleNotFoundError:  # For Heroku
     NLU_KEY = os.environ['NLU_KEY']
     PERSONALITY_INSIGHTS_KEY = os.environ['PERSONALITY_INSIGHTS_KEY']
 
-from fetch_repos import get_commits, get_pr_issues_body, get_avatar
+from githavior.fetch_repos import get_commits, get_pr_issues_body, get_avatar
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -36,9 +36,14 @@ naturalLanguageUnderstanding = NaturalLanguageUnderstandingV1(
     url='https://gateway-lon.watsonplatform.net/natural-language-understanding/api',
     username='apikey',
     password=NLU_KEY)
-
-@app.route('/', methods=['POST'])
+"""
+@app.route('/', methods=['GET'])
+def base():
+    return render_template('landing.html', title='Home')
+"""
+@app.route('/', methods=['GET'])
 def index():
+    return render_template('result.html', title='Home')
     username = request.form['username']
 
     commits = get_commits(username)
