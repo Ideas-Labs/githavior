@@ -122,7 +122,7 @@ def index():
     response = requests.get(avatar_url)
 
 
-    mask = np.array(Image.open(BytesIO(response.content))
+    mask = np.array(Image.open(BytesIO(response.content)))
     wc = WordCloud(background_color="white", mask=mask,
                stopwords=stopwords, contour_width=10, contour_color='steelblue')
     # generate word cloud
