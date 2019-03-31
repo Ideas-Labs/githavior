@@ -1,105 +1,82 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-    <header>
-        <h1 class="Heading">GitHaviour</h1>
-    </header>
-    <hr>
-    <div class="row">
-        <div class="col-sm-3">
-            <section class="card" style="width:100%">
-                <img class="card-img-top" src="{{ url_for('static', filename='img_avatar1.png') }}" alt="Card image" style="width:100%">
-                <div class="card-body" id="Username">
-                    <h4 class="card-title">Jane Doe</h4>
-                </div>
-            </section>
-        </div>
-        <div class="col-sm-9" id="Feedback" style="background-color:lavender;">
-            <p>Positive</p>
-        </div>
-    </div>
-    <hr>
-    <div class="row" style="height:300px">
-        <div class="col-sm-8" id="Summary" style="background-color:lavender;">
-            <p>Summary</p>
-        </div>
-        <div class="col-sm-4">
-            <div id="Point1">
-                <p>Point1</p>
+    <div class="ui segment">
+        <div class="ui grid">
+          <div class="four wide column">
+            <div class="ui fluid card">
+              <div class="image">
+                <img class="ui medium circular image" src="{{ url_for('static', filename='img_avatar1.png') }}" alt="Card image">
+              </div>
+              <div class="content ui image label" id="Username">
+                <a class="header">Jane Doe</a>
+              </div>
             </div>
-            <br>
-            <div id="Point2">
-                <p>Point2</p>
-            </div>
-            <br>
-            <div id="Point3">
-                <p>Point3</p>
-            </div>
+          </div>
+          <div class="eight wide column" id="Feedback">
+            <h2 class="ui huge header">
+                Positive 
+            </h2>
+          </div>
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-6">
-            <h2>Personality</h2>
-
-            <div id="Trait1">
-                <p class="float-left">Openness</p>
-                <br>
-                <div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
-                            40%
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="Trait2">
-                <p class="float-left">Openness</p>
-                <br>
-                <div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
-                            40%
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="Trait3">
-                <p class="float-left">Openness</p>
-                <br>
-                <div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
-                            40%
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <div class="ui segment">
+      <div class="ui two column very relaxed grid" >
+        <div class="column" id="Summary">
+          <p></p>
         </div>
-        <div class="col-sm-6" style="background-color:lavender;">
-            <div id="Commit">
-                <p>Commit:10</p>
-                <br>
+        <div class="column">
+          <p id="Point1"></p>
+          <p id="Point2"></p>
+          <p id="Point3"></p>
+        </div>
+      </div>
+      <div class="ui vertical divider">
+      </div>
+    </div>
+    <div class="ui segment">
+        <div class="ui container">
+            
+        </div>
+    </div>
+    <div class="ui segment">
+        <div class="ui two column very relaxed grid">
+            <div class="ui column">
+                <label>Personality</label>
+
+                <p id="Trait1">
+                </p>
+
+                <p id="Trait2">
+                </p>
+
+                <p id="Trait3">
+                </p>
             </div>
-            <div id="Issues">
-                <p>Issues:101</p>
-                <br>
-            </div>
-            <div id="Comments">
-                <p>Comments:110</p>
-                <br>
+            <div class="ui column">
+                <p id="Commit">
+                    <p>Commit:10</p>
+                </p>
+                <p id="Issues">
+                    <p>Issues:101</p>
+                </p>
+                <p id="Comments">
+                    <p>Comments:110</p>
+                </p>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <br>
     <div id="Wordnet">
         <img src="{{ url_for('static', filename='cloud.jpg') }}" class="img-rounded" alt="Cinque Terre">
+=======
+    
+    <div class="ui segment">
+        <div class="ui container" id="Wordnet">
+            <img src="{{ url_for('static', filename='download.jpg') }}" class="img-rounded" alt="Cinque Terre">
+        </div>
+>>>>>>> 0c61597cf4a5bd12c4ac71544a582cf9e63b7d63
     </div>
 </div>
 
