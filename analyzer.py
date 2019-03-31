@@ -2,7 +2,7 @@
 Analyzes user data using IBM Watson Personality Insights
 and Natural Language Understanding APIs.
 """
-
+from io import BytesIO
 import json
 import os
 
@@ -45,9 +45,10 @@ naturalLanguageUnderstanding = NaturalLanguageUnderstandingV1(
     password=NLU_KEY)
 
 
-mask = np.array(Image.open('static/img_avatar1.png'))
 stopwords = set(STOPWORDS)
 stopwords.add("said")
+
+mask = np.array(Image.open('static/img_avatar1.png'))
 wc = WordCloud(background_color="black", mask=mask,
                stopwords=stopwords, contour_width=10, contour_color='steelblue')
 
@@ -115,6 +116,15 @@ def index():
 
 
     print('Personality Insights done')
+
+
+    avatar_url = get_avatar(username)
+    response = requests.get(avatar_url)
+
+
+    mask = np.array(Image.open(BytesIO(response.content))
+    wc = WordCloud(background_color="white", mask=mask,
+               stopwords=stopwords, contour_width=10, contour_color='steelblue')
     # generate word cloud
     wc.generate(text)
 
@@ -134,7 +144,7 @@ def index():
     '''
     return render_template('result.html', title='Home')
     response = {
-        'username': username, 'avatar-url': get_avatar(username), 'profile': profile
+        'username': username, 'avatar-url': avatar_url, 'profile': profile
         }
         # Also, avatar url to be computed on FE.
     return jsonify(response)
