@@ -1,0 +1,16 @@
+{
+	"Pic":"a",
+	"Username":"Prakhar Gupta",
+	"Feedback":"Positive",
+	"Summary":"You are emotionally aware: you are aware of your feelings and how to express them. You are empathetic: you feel what others feel and are compassionate towards them. And you are altruistic: you feel fulfilled when helping others, and will go out of your way to do so.",
+	"Points":["be influenced by family when making product purchases","Latin Music","consider starting a business in next few years"],
+	"Personality":{
+		"Openness":"10%",
+		"Haziness":"50%",
+		"BBN":"45%"
+	},
+	"Commits":"10",
+	"Issues":"20",
+	"Comments":"40",
+	"Wordnet":"download.jpg"
+}
