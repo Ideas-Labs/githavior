@@ -16,7 +16,6 @@ MarkupSafe==1.1.1
 matplotlib==3.0.3
 numpy==1.16.2
 Pillow==5.4.1
-pkg-resources==0.0.0
 pyparsing==2.3.1
 python-dateutil==2.8.0
 requests==2.21.0
