@@ -2,7 +2,7 @@ function main2(){
 	$.getJSON('../static/sample.json', function(obj) {
 		console.log(obj);
 		//var jso = require('./static/sample.json');
-		/*
+		
 		var obj = {
 			"Username":"Prakhar Gupta",
 			"Feedback":"Positive",
@@ -18,7 +18,7 @@ function main2(){
 			"Comments":"40",
 			"Wordnet":"static/cloud.jpg"
 		};
-		*/	
+		
 		document.querySelector("#Username").innerHTML = obj["Username"]; 
 		document.querySelector("#Feedback").innerHTML = obj["Feedback"];
 		document.querySelector("#Summary").innerHTML = obj["Summary"];
