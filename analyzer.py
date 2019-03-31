@@ -51,13 +51,15 @@ def index():
 
     body_list = [{
             "content": text,
-            "contenttype": "text/plain",
-            "language": "en"
-        } for text in body
+            "content-type": "text/plain",
+            "language": "en",
+            "id": str(i)
+        } for i, text in enumerate(body)
         ]
 
     aug_content_list = commits.copy()
     aug_content_list["contentItems"] += body_list
+    print(json.dumps(aug_content_list, indent=4))
 
     aug_body = body + [comm["content"] for comm in commits["contentItems"]]
 
@@ -66,7 +68,39 @@ def index():
         'application/json',
         raw_scores=True,
         consumption_preferences=True).get_result()
+    
+    del profile["processed_language"]
+    del profile["consumption_preferences"]
+    del profile["warnings"]
+
+    profile["personality"] = sorted(profile["personality"], key=lambda x: x["percentile"], reverse=True)
+    
+    for item in profile["personality"]:
+        del item["trait_id"]
+        del item["raw_score"]
+        del item["significant"]
+        del item["category"]
+        for child in item["children"]:
+            del child["trait_id"]
+            del child["raw_score"]
+            del child["significant"]
+            #del item["category"]
+
+    
+    for key in ["needs", "values"]:
+        for item in profile[key]:
+            del item["trait_id"]
+            del item["raw_score"]
+            del item["significant"]
+            del item["category"]
+    
+    profile["needs"] = sorted(profile["needs"], key=lambda x: x["percentile"], reverse=True)[:5]
+    profile["values"] = sorted(profile["values"], key=lambda x: x["percentile"], reverse=True)[:5]
+
+
     print('Personality Insights done')
+    # Commenting out the following for now.
+    '''
     nlu_response = naturalLanguageUnderstanding.analyze(
         text=' '.join(aug_body),
         features=Features(
@@ -75,11 +109,12 @@ def index():
             concepts=ConceptsOptions(limit=5)
             )
         ).get_result()
-    print('NLU done')
+    '''
 
     response = {
-        'username': username, 'avatar-url': get_avatar(username), 'profile': profile,
-        'nlu_response': nlu_response}  # Also, avatar url to be computed on FE.
+        'username': username, 'avatar-url': get_avatar(username), 'profile': profile
+        }
+        # Also, avatar url to be computed on FE.
     return jsonify(response)
 
 
