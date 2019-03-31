@@ -5,6 +5,7 @@ and Natural Language Understanding APIs.
 from io import BytesIO
 import json
 import os
+import requests
 
 from PIL import Image
 import numpy as np
@@ -17,7 +18,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 
 from ibm_watson import PersonalityInsightsV3, NaturalLanguageUnderstandingV1
-from ibm_watson.natural_language_understanding_v1 import Features, ConceptsOptions, EntitiesOptions, KeywordsOptions
+from ibm_watson.natural_language_understanding_v1 import Features, EmotionOptions
 
 try:
     from githavior.credentials import NLU_KEY, PERSONALITY_INSIGHTS_KEY
@@ -48,7 +49,7 @@ naturalLanguageUnderstanding = NaturalLanguageUnderstandingV1(
 stopwords = set(STOPWORDS)
 stopwords.add("said")
 
-mask = np.array(Image.open('static/img_avatar1.png'))
+
 wc = WordCloud(background_color="black", mask=mask,
                stopwords=stopwords, contour_width=10, contour_color='steelblue')
 
@@ -75,7 +76,6 @@ def index():
 
     aug_content_list = commits.copy()
     aug_content_list["contentItems"] += body_list
-    print(json.dumps(aug_content_list, indent=4))
 
     aug_body = body + [comm["content"] for comm in commits["contentItems"]]
     text = ' '.join(aug_body)
@@ -119,35 +119,33 @@ def index():
 
 
     avatar_url = get_avatar(username)
-    response = requests.get(avatar_url)
 
+    response = requests.get(avatar_url)
 
     mask = np.array(Image.open(BytesIO(response.content)))
     wc = WordCloud(background_color="white", mask=mask,
                stopwords=stopwords, contour_width=10, contour_color='steelblue')
     # generate word cloud
+    
     wc.generate(text)
 
     # store to file
     wc.to_file('static/cloud.jpg')
 
-    # Commenting out the following for now.
-    '''
     nlu_response = naturalLanguageUnderstanding.analyze(
         text=' '.join(aug_body),
         features=Features(
-            entities=EntitiesOptions(emotion=True, sentiment=True, limit=5),
-            keywords=KeywordsOptions(emotion=True, sentiment=True),
-            concepts=ConceptsOptions(limit=5)
+            emotion=EmotionOptions(document=True)
             )
         ).get_result()
-    '''
-    return render_template('result.html', title='Home')
+
     response = {
-        'username': username, 'avatar-url': avatar_url, 'profile': profile
+        "username": username, "avatar-url": avatar_url, "profile": profile
         }
-        # Also, avatar url to be computed on FE.
-    return jsonify(response)
+    response["profile"]["emotion"] = nlu_response["emotion"]["document"]["emotion"]
+
+    return render_template('result.html', title='Home', resp=response)
+    #return jsonify(response)
 
 
 if __name__ == '__main__':
