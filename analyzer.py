@@ -50,18 +50,14 @@ stopwords = set(STOPWORDS)
 stopwords.add("said")
 
 
-wc = WordCloud(background_color="black", mask=mask,
-               stopwords=stopwords, contour_width=10, contour_color='steelblue')
-
-"""
 @app.route('/', methods=['GET'])
 def base():
     return render_template('landing.html', title='Home')
-"""
-@app.route('/', methods=['GET'])
+
+@app.route('/', methods=['POST'])
 def index():
     
-    username = "prakhar897"
+    username = request.form['username']
 
     commits = get_commits(username)
     body = get_pr_issues_body(username)

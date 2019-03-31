@@ -1,0 +1,233 @@
+{
+    "avatar-url": "https://avatars1.githubusercontent.com/u/22810216?v=4",
+    "profile": {
+        "needs": [
+            {
+                "name": "Curiosity",
+                "percentile": 0.9930164895976028
+            },
+            {
+                "name": "Liberty",
+                "percentile": 0.8596341315752699
+            },
+            {
+                "name": "Practicality",
+                "percentile": 0.7614887807286094
+            },
+            {
+                "name": "Ideal",
+                "percentile": 0.7365604046810859
+            },
+            {
+                "name": "Self-expression",
+                "percentile": 0.6746201281866611
+            }
+        ],
+        "personality": [
+            {
+                "children": [
+                    {
+                        "category": "personality",
+                        "name": "Fiery",
+                        "percentile": 0.8004180263751872
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Prone to worry",
+                        "percentile": 0.7328403337713162
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Melancholy",
+                        "percentile": 0.7953265343267999
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Immoderation",
+                        "percentile": 0.005436506449669698
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Self-consciousness",
+                        "percentile": 0.943176788365149
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Susceptible to stress",
+                        "percentile": 0.8769312969240526
+                    }
+                ],
+                "name": "Emotional range",
+                "percentile": 0.7070373303647379
+            },
+            {
+                "children": [
+                    {
+                        "category": "personality",
+                        "name": "Adventurousness",
+                        "percentile": 0.26626159117159676
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Artistic interests",
+                        "percentile": 0.6019390507560347
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Emotionality",
+                        "percentile": 0.04351799638775661
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Imagination",
+                        "percentile": 0.6081649565842746
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Intellect",
+                        "percentile": 0.8801403690513333
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Authority-challenging",
+                        "percentile": 0.7109755589654371
+                    }
+                ],
+                "name": "Openness",
+                "percentile": 0.6066038106721734
+            },
+            {
+                "children": [
+                    {
+                        "category": "personality",
+                        "name": "Achievement striving",
+                        "percentile": 0.1733971933901256
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Cautiousness",
+                        "percentile": 0.5764330662871634
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Dutifulness",
+                        "percentile": 0.046723362984029904
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Orderliness",
+                        "percentile": 0.8253406781650412
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Self-discipline",
+                        "percentile": 0.5399751779753789
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Self-efficacy",
+                        "percentile": 0.34491647936234193
+                    }
+                ],
+                "name": "Conscientiousness",
+                "percentile": 0.4678660821821195
+            },
+            {
+                "children": [
+                    {
+                        "category": "personality",
+                        "name": "Activity level",
+                        "percentile": 0.5206553096172724
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Assertiveness",
+                        "percentile": 0.15520575894923394
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Cheerfulness",
+                        "percentile": 0.03376868562634128
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Excitement-seeking",
+                        "percentile": 0.7139424762633759
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Outgoing",
+                        "percentile": 0.10112467526459035
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Gregariousness",
+                        "percentile": 0.09613568970021558
+                    }
+                ],
+                "name": "Extraversion",
+                "percentile": 0.26826864321524135
+            },
+            {
+                "children": [
+                    {
+                        "category": "personality",
+                        "name": "Altruism",
+                        "percentile": 0.012458358003338665
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Cooperation",
+                        "percentile": 0.20368035240905885
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Modesty",
+                        "percentile": 0.4027651340456042
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Uncompromising",
+                        "percentile": 0.2706376517563178
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Sympathy",
+                        "percentile": 0.3947546244518785
+                    },
+                    {
+                        "category": "personality",
+                        "name": "Trust",
+                        "percentile": 0.0720585795635269
+                    }
+                ],
+                "name": "Agreeableness",
+                "percentile": 0.1719140414950781
+            }
+        ],
+        "values": [
+            {
+                "name": "Hedonism",
+                "percentile": 0.6198584862263876
+            },
+            {
+                "name": "Openness to change",
+                "percentile": 0.5192498698666242
+            },
+            {
+                "name": "Self-transcendence",
+                "percentile": 0.2417558416309894
+            },
+            {
+                "name": "Self-enhancement",
+                "percentile": 0.1960596941531717
+            },
+            {
+                "name": "Conservation",
+                "percentile": 0.07380137926828417
+            }
+        ],
+        "word_count": 34476
+    },
+    "username": "schedutron"
+}

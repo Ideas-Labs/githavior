@@ -4,11 +4,13 @@
 	<h2 class="ui huge  center aligned header">
   		Welcome to githavior!
 	</h2>
-    <div class="ui form">
-	  <div class="field">
-	    <input type="email" placeholder="ParthS007">
-	  </div>
-	  <div class="ui right floated submit primary button">Submit</div>
-	</div>
+	<form action="/" method="POST">
+		<div class="ui form" >
+			<div class="field">
+				<input type="text" name="username" placeholder="ParthS007">
+			</div>
+			<input type="submit" name="submit" class="ui right floated submit primary button">
+		</div>
+	</form>
 </div>
 {% endblock %}
