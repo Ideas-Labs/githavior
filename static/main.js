@@ -13,7 +13,7 @@ function main2(){
 		"Commits":"10",
 		"Issues":"20",
 		"Comments":"40",
-		"Wordnet":"download.jpg"
+		"Wordnet":"static/cloud.jpg"
 	};
 	//console.log(obj);
 	//console.log(obj["Username"]);

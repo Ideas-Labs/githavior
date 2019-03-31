@@ -6,6 +6,13 @@ and Natural Language Understanding APIs.
 import json
 import os
 
+from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+from wordcloud import WordCloud, STOPWORDS
+
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 
@@ -36,6 +43,14 @@ naturalLanguageUnderstanding = NaturalLanguageUnderstandingV1(
     url='https://gateway-lon.watsonplatform.net/natural-language-understanding/api',
     username='apikey',
     password=NLU_KEY)
+
+
+mask = np.array(Image.open('static/img_avatar1.png'))
+stopwords = set(STOPWORDS)
+stopwords.add("said")
+wc = WordCloud(background_color="black", mask=mask,
+               stopwords=stopwords, contour_width=10, contour_color='steelblue')
+
 """
 @app.route('/', methods=['GET'])
 def base():
@@ -43,8 +58,8 @@ def base():
 """
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('result.html', title='Home')
-    username = request.form['username']
+    
+    username = "prakhar897"
 
     commits = get_commits(username)
     body = get_pr_issues_body(username)
@@ -62,6 +77,7 @@ def index():
     print(json.dumps(aug_content_list, indent=4))
 
     aug_body = body + [comm["content"] for comm in commits["contentItems"]]
+    text = ' '.join(aug_body)
 
     profile = personality_service.profile(
         str(aug_content_list),  # behavior not returned even for temporal data!
@@ -99,6 +115,12 @@ def index():
 
 
     print('Personality Insights done')
+    # generate word cloud
+    wc.generate(text)
+
+    # store to file
+    wc.to_file('static/cloud.jpg')
+
     # Commenting out the following for now.
     '''
     nlu_response = naturalLanguageUnderstanding.analyze(
@@ -110,7 +132,7 @@ def index():
             )
         ).get_result()
     '''
-
+    return render_template('result.html', title='Home')
     response = {
         'username': username, 'avatar-url': get_avatar(username), 'profile': profile
         }
