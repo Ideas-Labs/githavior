@@ -20,7 +20,7 @@ pyparsing==2.3.1
 python-dateutil==2.8.0
 requests==2.21.0
 six==1.12.0
-urllib3==1.24.1
+urllib3==1.26.5
 watson-developer-cloud==2.10.0
 websocket-client==0.48.0
 Werkzeug==0.15.1
